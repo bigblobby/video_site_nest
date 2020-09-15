@@ -1,0 +1,30 @@
+server/node_modules
+client/node_modules
+client/dist
+
+# compiled output
+server/dist
+
+# Logs
+server/logs
+server/*.log
+server/npm-debug.log*
+server/yarn-debug.log*
+server/yarn-error.log*
+server/lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+server/coverage
+server/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
