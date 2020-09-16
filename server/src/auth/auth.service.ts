@@ -60,7 +60,7 @@ export class AuthService {
             const password = await this.encryptPassword(pass);
 
             const user = await this.usersService.create(username, password);
-            const payload = { username: user.username, sub: user.id };
+            const payload = { email: user.email, sub: user.id };
             return {
                 access_token: this.jwtService.sign(payload),
             };
@@ -71,7 +71,7 @@ export class AuthService {
     }
 
     async login(user: any) {
-        const payload = { username: user.username, sub: user.id };
+        const payload = { email: user.email, sub: user.id };
         return {
             access_token: this.jwtService.sign(payload),
         };

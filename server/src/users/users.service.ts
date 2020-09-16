@@ -14,19 +14,19 @@ export class UsersService {
         return this.usersRepository.find();
     }
 
-    findOne(username: string): Promise<User> {
-        return this.usersRepository.findOne({where: {username: username}});
+    findOne(email: string): Promise<User> {
+        return this.usersRepository.findOne({where: {email: email}});
     }
 
-    async create(username: string, password: string): Promise<User> {
+    async create(email: string, password: string): Promise<User> {
         const userEntity = await this.usersRepository.create({
-            username: username,
+            email: email,
             password: password
         });
 
         await this.usersRepository.save(userEntity);
 
-        const newUser = await this.usersRepository.findOne({where: {username}});
+        const newUser = await this.usersRepository.findOne({where: {email}});
 
         return newUser;
     }
