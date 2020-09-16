@@ -11,8 +11,12 @@ export class UsersService {
         private usersRepository: Repository<User>,
     ) {}
 
-    getAll(): Promise<User[]> {
+    findAll(): Promise<User[]> {
         return this.usersRepository.find();
+    }
+
+    findOne(username: string): Promise<User> {
+        return this.usersRepository.findOne({where: {username: username}});
     }
 
     async create(username: string, password: string): Promise<User> {
@@ -23,9 +27,8 @@ export class UsersService {
 
         await this.usersRepository.save(userEntity);
 
-        const newUser = this.usersRepository.findOne({where: {username}});
+        const newUser = await this.usersRepository.findOne({where: {username}});
 
-        console.log(newUser);
         return newUser;
     }
 }

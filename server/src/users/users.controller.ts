@@ -7,8 +7,8 @@ export class UsersController {
     constructor(private userService: UsersService) {}
 
     @Get()
-    getAll(){
-        return this.userService.getAll();
+    findAll(){
+        return this.userService.findAll();
     }
 
     @Post()
