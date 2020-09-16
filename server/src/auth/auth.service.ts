@@ -22,7 +22,7 @@ export class AuthService {
         });
     }
 
-    async decryptPassword(password, hash){
+    async decryptPassword(password, hash): Promise<boolean|string>{
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, hash)
                 .then(result => {
