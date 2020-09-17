@@ -33,7 +33,7 @@ export class AuthService {
         });
     }
 
-    async validateUser(username: string, pass: string): Promise<any> {
+    async login(username: string, pass: string): Promise<any> {
         try {
             const user = await this.usersService.findOne(username);
 
@@ -59,18 +59,13 @@ export class AuthService {
             // Encrypt password
             const password = await this.encryptPassword(pass);
 
-            const user = await this.usersService.create(username, password);
-            const payload = { email: user.email, sub: user.id };
-            return {
-                access_token: this.jwtService.sign(payload),
-            };
+            return await this.usersService.create(username, password);
         } catch (e) {
             throw new InternalServerErrorException();
         }
-
     }
 
-    async login(user: any) {
+    async signToken(user: any) {
         const payload = { email: user.email, sub: user.id };
         return {
             access_token: this.jwtService.sign(payload),
