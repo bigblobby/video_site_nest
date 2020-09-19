@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { userLogin } from "../actions/userActions";
-import { Redirect } from 'react-router-dom';
 
 type LoginPageState = {
     email: string;

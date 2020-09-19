@@ -1,5 +1,6 @@
 import axios from 'axios';
 import TokenService from "./TokenService";
+import {ILoginResponse, IRegisterResponse, IUserPostData} from "../interfaces";
 
 const instance = axios.create({
     baseURL: '/api'
@@ -8,7 +9,7 @@ const instance = axios.create({
 class ApiService {
     cache = {};
 
-    getCached(key, callback){
+    getCached(key: string, callback: Function): any {
         if(this.cache.hasOwnProperty(key)) return this.cache[key];
         return this.cache[key] = callback();
     }
@@ -47,29 +48,14 @@ class ApiService {
         return this.post(uri, {}, config);
     }
 
-    registerUser(data){
+    registerUser(data: IUserPostData): Promise<IRegisterResponse>{
         const uri = '/auth/register';
         return this.post(uri, data);
     }
 
-    loginUser(data){
+    loginUser(data: IUserPostData): Promise<ILoginResponse>{
         const uri = '/auth/login';
         return this.post(uri, data);
-    }
-
-    createPost(data){
-        const token = TokenService.getToken();
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        }
-
-        const uri = '/post/create';
-        return this.post(uri, data, config);
-    }
-
-    getAllPosts(){
-        const uri = '/post/all';
-        return this.get(uri);
     }
 
     getUserChannel(params){

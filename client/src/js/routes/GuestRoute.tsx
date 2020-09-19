@@ -3,7 +3,6 @@ import { Route } from 'react-router'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { verifyToken } from "../actions/userActions";
-import TokenService from "../services/TokenService";
 
 type GuestRouteProps = {
     verifyToken: () => {},
