@@ -1,4 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from "typeorm";
+import {Exclude} from "class-transformer";
+import {Profile} from "./profile.entity";
 
 @Entity()
 export class User {
@@ -9,5 +11,9 @@ export class User {
     email: string;
 
     @Column()
+    @Exclude()
     password: string
+
+    @OneToOne(type => Profile, profile => profile.user)
+    profile: Profile
 }

@@ -6,22 +6,22 @@ export class Profile {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: true})
     username: string;
 
-    @Column()
+    @Column({nullable: true})
     firstName: string;
 
-    @Column()
+    @Column({nullable: true})
     lastName: string;
 
-    @Column('date')
+    @Column({nullable: true})
     birthday: Date;
 
-    @Column()
+    @Column({nullable: true})
     phone: string;
 
-    @OneToOne(type => User)
+    @OneToOne(type => User, user => user.profile, {cascade: true})
     @JoinColumn()
     user: User
 }

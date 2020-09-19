@@ -33,9 +33,9 @@ export class AuthService {
         });
     }
 
-    async login(username: string, pass: string): Promise<any> {
+    async login(email: string, pass: string): Promise<any> {
         try {
-            const user = await this.usersService.findOne(username);
+            const user = await this.usersService.findOne({where: {email}});
 
             // Decrypt password
             if(await this.decryptPassword(pass, user.password)) {
@@ -50,8 +50,8 @@ export class AuthService {
         }
     }
 
-    async register(username: string, pass: string){
-        if(await this.usersService.findOne(username)){
+    async register(email: string, pass: string){
+        if(await this.usersService.findOne({where: {email}})){
             throw new BadRequestException('Sorry username already in use')
         }
 
@@ -59,7 +59,9 @@ export class AuthService {
             // Encrypt password
             const password = await this.encryptPassword(pass);
 
-            return await this.usersService.create(username, password);
+            const user = await this.usersService.create(email, password);
+            delete user.password;
+            return user;
         } catch (e) {
             throw new InternalServerErrorException();
         }
@@ -68,7 +70,8 @@ export class AuthService {
     async signToken(user: any) {
         const payload = { email: user.email, sub: user.id };
         return {
-            access_token: this.jwtService.sign(payload),
+            user: user,
+            token: this.jwtService.sign(payload),
         };
     }
 }
