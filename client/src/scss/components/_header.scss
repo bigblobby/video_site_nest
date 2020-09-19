@@ -1,0 +1,58 @@
+.main-header {
+    display: flex;
+
+    .main-header--inner {
+        display: flex;
+        justify-content: space-between;
+
+        .logo {
+            a {
+                display: block;
+                padding: 1rem 0;
+            }
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+
+            ul {
+                padding: 0;
+                margin: 0;
+                display: flex;
+                list-style: none;
+                height: 100%;
+
+                li {
+                    a {
+                        display: flex;
+                        align-items: center;
+                        padding: 1.25rem 2rem;
+                        height: 100%;
+                        color: $mineshaft;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+
+                        &.active {
+                            border-bottom: 2px solid $punch;
+                        }
+                    }
+                }
+            }
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+
+            a {
+                &.login {
+                    color: $punch;
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+}
