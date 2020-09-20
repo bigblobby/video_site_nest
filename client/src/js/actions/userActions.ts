@@ -3,38 +3,30 @@ import TokenService from "../services/TokenService";
 import {push} from 'connected-react-router';
 
 // Action types
-const userRegisterSuccessAction = (user) => ({
-    type: 'REGISTER_SUCCESS',
+const authSuccessAction =  (user) => ({
+    type: 'AUTH_SUCCESS',
     payload: user
 });
 
-const userRegisterFailureAction = (error) => ({
-    type: 'REGISTER_FAILURE',
+const authFailureAction = (error) => ({
+    type: 'AUTH_FAILURE',
     payload: error
 });
 
-const userLoginSuccessAction = (user) => ({
-    type: "LOGIN_SUCCESS",
-    payload: user
-});
-
-const userLoginFailureAction = (error) => ({
-    type: 'LOGIN_FAILURE',
-    payload: error
-});
+const userLogoutAction = () => ({
+    type: 'USER_LOGOUT'
+})
 
 // Action creators
 export function userRegister(data){
     return (dispatch) => {
         ApiService.registerUser(data)
             .then(result => {
-                console.log(result);
-                dispatch(userRegisterSuccessAction(result.user));
+                dispatch(authSuccessAction(result.user));
                 TokenService.setToken(result.token);
                 dispatch(push('/'));
             }).catch(err => {
-                console.log(err);
-                dispatch(userRegisterFailureAction(err.error));
+                dispatch(authFailureAction(err.error));
             });
     }
 }
@@ -43,13 +35,20 @@ export function userLogin(data, previousUrl = '/'){
     return (dispatch) => {
         ApiService.loginUser(data)
             .then(result => {
-                dispatch(userLoginSuccessAction(result.user));
+                dispatch(authSuccessAction(result.user));
                 TokenService.setToken(result.token);
                 dispatch(push(previousUrl));
             }).catch(err => {
-                console.log(err);
-                dispatch(userLoginFailureAction(err.message));
+                dispatch(authFailureAction(err.message));
             });
+    }
+}
+
+export function userLogout(){
+    return (dispatch) => {
+        TokenService.removeToken();
+        dispatch(userLogoutAction())
+        dispatch(push('/'))
     }
 }
 
@@ -61,17 +60,11 @@ export function verifyToken(){
 
         try {
             const user = await ApiService.verifyToken();
-            dispatch(userLoginSuccessAction(user));
+            dispatch(authSuccessAction(user));
         } catch(e) {
-            dispatch(userLoginFailureAction('Could not verify token'));
+            dispatch(authFailureAction('Could not verify token'));
             TokenService.removeToken();
             dispatch(push('/login'));
         }
-    }
-}
-
-export function setPrevUrl(url){
-    return (dispatch) => {
-        dispatch({type: "CHANGE_PREV_LOCATION", payload: url });
     }
 }

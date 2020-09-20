@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { verifyToken, setPrevUrl } from "../actions/userActions";
+import { verifyToken } from "../actions/userActions";
+import { setPrevUrl } from "../actions/appActions";
 
 type PrivateRouteProps = {
     verifyToken: () => {};
@@ -21,6 +22,8 @@ class PrivateRoute extends React.Component<PrivateRouteProps, {}> {
 
     render() {
         const { authenticated, component: Component } = this.props;
+
+        if(!authenticated) return null;
 
         return (
             <Route

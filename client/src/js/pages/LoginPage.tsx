@@ -62,8 +62,9 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
     }
 }
 
-const mapStateToProps = ({userReducer}) => {
-    const {user, error, prevUrl} = userReducer;
+const mapStateToProps = ({userReducer, appReducer}) => {
+    const {user, error} = userReducer;
+    const {prevUrl} = appReducer;
     return {
         user,
         error,
