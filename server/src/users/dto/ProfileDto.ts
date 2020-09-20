@@ -1,6 +1,8 @@
 import {IsPhoneNumber, IsDate, MinLength, IsOptional} from "class-validator";
 
 export class ProfileDto {
+    id: number
+
     @MinLength(1)
     username: string;
 

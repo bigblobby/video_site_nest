@@ -14,5 +14,4 @@ export class ProfileRepository extends Repository<Profile> {
             .orUpdate({ conflict_target: ['userId'], overwrite: ['username', 'firstName', 'lastName', 'birthday', 'phone', 'userId'] })
             .execute();
     }
-
 }
