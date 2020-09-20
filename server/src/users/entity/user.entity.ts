@@ -12,8 +12,11 @@ export class User {
 
     @Column()
     @Exclude()
-    password: string
+    password: string;
+
+    @Column({default: false})
+    verified: boolean;
 
     @OneToOne(type => Profile, profile => profile.user)
-    profile: Profile
+    profile: Profile;
 }

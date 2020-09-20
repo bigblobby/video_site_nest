@@ -7,6 +7,8 @@ import {JwtModule} from "@nestjs/jwt";
 import {jwtConstants} from "./constants";
 import {LocalStrategy} from "./strategy/local.strategy";
 import {JwtStrategy} from "./strategy/jwt.strategy";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {EmailVerificationRepository} from "./repository/emailVerification.repository";
 
 @Module({
     imports: [
@@ -15,7 +17,8 @@ import {JwtStrategy} from "./strategy/jwt.strategy";
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '60000s' },
-        })
+        }),
+        TypeOrmModule.forFeature([EmailVerificationRepository])
     ],
     controllers: [AuthController],
     providers: [AuthService, LocalStrategy, JwtStrategy]

@@ -48,6 +48,11 @@ class ApiService {
         return this.post(uri, {}, config);
     }
 
+    verifyEmail(token){
+        const uri = `/auth/email/verify/${token}`;
+        return this.get(uri);
+    }
+
     registerUser(data: IUserPostData): Promise<IRegisterResponse>{
         const uri = '/auth/register';
         return this.post(uri, data);

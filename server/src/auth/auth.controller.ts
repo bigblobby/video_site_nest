@@ -1,4 +1,4 @@
-import {Controller, Post, Body, Request, UseGuards} from '@nestjs/common';
+import {Controller, Post, Get, Body, Param, Request, UseGuards, InternalServerErrorException} from '@nestjs/common';
 import {AuthService} from "./auth.service";
 import {LocalAuthGuard} from "./guard/local-auth.guard";
 import {JwtAuthGuard} from "./guard/jwt-auth.guard";
@@ -19,7 +19,29 @@ export class AuthController {
     @Post('register')
     async register(@Body() createUserDto: CreateUserDto){
         const user = await this.authService.register(createUserDto.email, createUserDto.password);
+
+        await this.authService.createEmailToken(createUserDto.email);
+        await this.authService.sendEmailVerification(createUserDto.email);
         return this.authService.signToken(user);
+    }
+
+    @Get('email/verify/:token')
+    async verify(@Param('token') token){
+        return await this.authService.verifyEmail(token);
+    }
+
+    @Get('email/resend-verification/:email')
+    async resendVerification(@Param('email') email){
+        try {
+            await this.authService.createEmailToken(email);
+            const isSent = await this.authService.sendEmailVerification(email);
+
+            if(isSent){
+                return {message: 'Email has been re-sent'};
+            }
+        } catch (error) {
+            throw new InternalServerErrorException('Email has not been sent');
+        }
     }
 
     @Post('protect')
