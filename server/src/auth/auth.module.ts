@@ -9,16 +9,19 @@ import {LocalStrategy} from "./strategy/local.strategy";
 import {JwtStrategy} from "./strategy/jwt.strategy";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {EmailVerificationRepository} from "./repository/emailVerification.repository";
+import {ConfigModule} from "@nestjs/config";
+import {ForgotPasswordRepository} from "./repository/forgotPassword.repository";
 
 @Module({
     imports: [
+        ConfigModule,
         UsersModule,
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '60000s' },
         }),
-        TypeOrmModule.forFeature([EmailVerificationRepository])
+        TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
     ],
     controllers: [AuthController],
     providers: [AuthService, LocalStrategy, JwtStrategy]

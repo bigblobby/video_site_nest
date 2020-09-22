@@ -18,7 +18,6 @@ class UserVerifyPage extends React.Component<UserVerifyPageProps, UserVerifyPage
         }
     }
 
-
     componentDidMount() {
         const token = this.props.match.params.token;
         ApiService.verifyEmail(token)

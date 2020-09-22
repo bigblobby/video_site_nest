@@ -44,6 +44,24 @@ export class AuthController {
         }
     }
 
+    @Post('user/forgot-password')
+    async forgotPassword(@Body('email') email){
+        try {
+            return await this.authService.forgotPassword(email);
+        } catch (e) {
+            throw new InternalServerErrorException();
+        }
+    }
+
+    @Post('user/change-password')
+    async changePassword(@Body() body){
+        try {
+            return await this.authService.changePassword(body.token, body.password);
+        } catch (e) {
+            throw new InternalServerErrorException();
+        }
+    }
+
     @Post('protect')
     @UseGuards(JwtAuthGuard)
     async protect(@Request() req){

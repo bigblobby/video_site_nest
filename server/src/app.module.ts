@@ -1,29 +1,23 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
 import { UsersModule } from './users/users.module';
 import {APP_PIPE} from "@nestjs/core";
 import {ValidationPipe} from "./common/pipes/validation.pipe";
 import {Connection} from "typeorm";
 import { AuthModule } from './auth/auth.module';
+import * as path from "path";
+import {ConfigModule} from "nestjs-config";
 
 @Module({
-    imports: [TypeOrmModule.forRoot({
-        type: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'remote',
-        password: 'password',
-        database: 'video_site_nest',
-        entities: [],
-        synchronize: true,
-        autoLoadEntities: true,
-    }),
+    imports: [
+        ConfigModule.load(path.resolve(__dirname, 'config/database.js')),
+        TypeOrmModule.forRootAsync({
+            useFactory: async (config: ConfigService) => config.get('database'),
+            inject: [ConfigService],
+        }),
         UsersModule,
         AuthModule,
     ],

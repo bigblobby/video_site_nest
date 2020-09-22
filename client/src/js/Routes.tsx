@@ -46,7 +46,7 @@ function Routes() {
                             <GuestRoute exact path="/register" verify component={RegisterPage} />
                             <Route exact path="/user/channel/:username" component={UserChannelPage} />
                             <PrivateRoute exact path="/user/profile" component={UserProfilePage} />
-                            <PrivateRoute exact path="/user/verify/:token" component={UserVerifyPage} />
+                            <Route exact path="/user/verify/:token" component={UserVerifyPage} />
                         </Switch>
                     </Suspense>
                 </div>
