@@ -10,6 +10,8 @@ import {Connection} from "typeorm";
 import { AuthModule } from './auth/auth.module';
 import * as path from "path";
 import {ConfigModule} from "nestjs-config";
+import { MailerService } from './mailer/mailer.service';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
     imports: [
@@ -20,6 +22,7 @@ import {ConfigModule} from "nestjs-config";
         }),
         UsersModule,
         AuthModule,
+        MailerModule,
     ],
     controllers: [AppController],
     providers: [
@@ -28,6 +31,7 @@ import {ConfigModule} from "nestjs-config";
             provide: APP_PIPE,
             useClass: ValidationPipe
         },
+        MailerService,
     ],
 })
 export class AppModule {

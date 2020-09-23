@@ -3,12 +3,14 @@ import {AuthService} from "./auth.service";
 import {LocalAuthGuard} from "./guard/local-auth.guard";
 import {JwtAuthGuard} from "./guard/jwt-auth.guard";
 import {CreateUserDto} from "../users/dto/CreateUserDto";
+import {MailerService} from "../mailer/mailer.service";
 
 @Controller('auth')
 export class AuthController {
     constructor(
         private authService: AuthService,
-    ) {}
+        private mailerService: MailerService,
+    ){}
 
     @Post('login')
     @UseGuards(LocalAuthGuard)
@@ -21,7 +23,7 @@ export class AuthController {
         const user = await this.authService.register(createUserDto.email, createUserDto.password);
 
         await this.authService.createEmailToken(createUserDto.email);
-        await this.authService.sendEmailVerification(createUserDto.email);
+        await this.mailerService.sendEmailVerification(createUserDto.email);
         return this.authService.signToken(user);
     }
 
@@ -34,7 +36,7 @@ export class AuthController {
     async resendVerification(@Param('email') email){
         try {
             await this.authService.createEmailToken(email);
-            const isSent = await this.authService.sendEmailVerification(email);
+            const isSent = await this.mailerService.sendEmailVerification(email);
 
             if(isSent){
                 return {message: 'Email has been re-sent'};

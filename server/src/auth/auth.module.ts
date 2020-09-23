@@ -11,11 +11,13 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {EmailVerificationRepository} from "./repository/emailVerification.repository";
 import {ConfigModule} from "@nestjs/config";
 import {ForgotPasswordRepository} from "./repository/forgotPassword.repository";
+import {MailerModule} from "../mailer/mailer.module";
 
 @Module({
     imports: [
         ConfigModule,
         UsersModule,
+        MailerModule,
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
@@ -24,6 +26,9 @@ import {ForgotPasswordRepository} from "./repository/forgotPassword.repository";
         TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
     ],
     controllers: [AuthController],
-    providers: [AuthService, LocalStrategy, JwtStrategy]
+    providers: [AuthService, LocalStrategy, JwtStrategy],
+    exports: [
+        TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
+    ]
 })
 export class AuthModule {}
