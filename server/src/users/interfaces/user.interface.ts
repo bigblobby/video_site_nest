@@ -1,4 +1,5 @@
-export interface UserInterface {
-    username: string;
-    password: string;
+export interface IUserResponse {
+    id: number;
+    email: string;
+    verified: boolean;
 }

@@ -21,14 +21,20 @@ import {MailerModule} from "../mailer/mailer.module";
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
-            signOptions: { expiresIn: '60000s' },
+            signOptions: jwtConstants.signOptions,
         }),
-        TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
+        TypeOrmModule.forFeature([
+            EmailVerificationRepository,
+            ForgotPasswordRepository
+        ])
     ],
     controllers: [AuthController],
     providers: [AuthService, LocalStrategy, JwtStrategy],
     exports: [
-        TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
+        TypeOrmModule.forFeature([
+            EmailVerificationRepository,
+            ForgotPasswordRepository
+        ])
     ]
 })
 export class AuthModule {}

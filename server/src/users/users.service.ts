@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {User} from './entity/user.entity';
 import {FindOneOptions} from "typeorm";
 import {UserRepository} from "./repository/user.repository";
+import {IUserResponse} from "./interfaces/user.interface";
 
 @Injectable()
 export class UsersService {
@@ -19,7 +20,7 @@ export class UsersService {
         return this.usersRepository.findOne(options);
     }
 
-    async update(options: FindOneOptions, updateOptions){
+    async update(options: FindOneOptions, updateOptions): Promise<User>{
         let user = await this.findOne(options);
         for(let prop in updateOptions){
             user[prop] = updateOptions[prop]

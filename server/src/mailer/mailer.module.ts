@@ -8,7 +8,10 @@ import {ForgotPasswordRepository} from "../auth/repository/forgotPassword.reposi
 @Module({
     imports: [
         ConfigModule,
-        TypeOrmModule.forFeature([EmailVerificationRepository, ForgotPasswordRepository])
+        TypeOrmModule.forFeature([
+            EmailVerificationRepository,
+            ForgotPasswordRepository
+        ])
     ],
     providers: [MailerService],
     exports: [MailerService]

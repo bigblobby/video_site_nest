@@ -4,11 +4,12 @@ export interface IUserPostData {
 }
 
 export interface ILoginRegisterResponse {
-    token: string;
     user: {
         id: number;
         email: string;
+        verified: boolean;
     };
+    token: string;
 }
 
 export interface IRegisterResponse extends ILoginRegisterResponse {}

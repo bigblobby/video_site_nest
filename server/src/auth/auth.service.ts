@@ -13,6 +13,9 @@ import {EmailVerification} from "./entity/emailVerification.entity";
 import {EmailVerificationRepository} from "./repository/emailVerification.repository";
 import {ForgotPasswordRepository} from "./repository/forgotPassword.repository";
 import {MailerService} from "../mailer/mailer.service";
+import {ILoginRegisterResponse} from "../users/interfaces/response/LoginRegisterResponse";
+import {IGenericResponse} from "../common/interfaces/response/GenericResponse";
+import {IUserResponse} from "../users/interfaces/user.interface";
 
 @Injectable()
 export class AuthService {
@@ -64,7 +67,7 @@ export class AuthService {
         }
     }
 
-    async register(email: string, pass: string){
+    async register(email: string, pass: string): Promise<IUserResponse>{
         if(await this.usersService.findOne({where: {email}})){
             throw new BadRequestException('Sorry username already in use')
         }
@@ -81,15 +84,15 @@ export class AuthService {
         }
     }
 
-    async signToken(user: any) {
-        const payload = { email: user.email, sub: user.id };
+    signToken(user: any): ILoginRegisterResponse {
+        const payload = { email: user.email, sub: user.id, verified: user.verified };
         return {
             user: user,
             token: this.jwtService.sign(payload),
         };
     }
 
-    async createEmailToken(email: string){
+    async createEmailToken(email: string): Promise<void>{
         const model = await this.emailVerificationRepository.findOne({where: {email: email}});
         const token = Math.random().toString(36).substr(2, 9);
 
@@ -100,7 +103,7 @@ export class AuthService {
         }
     }
 
-    async verifyEmail(token: string){
+    async verifyEmail(token: string): Promise<IGenericResponse> {
         const emailVerification = await this.emailVerificationRepository.findOne({where: {token: token}})
 
         if(emailVerification && emailVerification.token){
@@ -108,23 +111,27 @@ export class AuthService {
 
             if(user){
                 await this.usersService.update({where: {id: user.id}}, {verified: true})
-                return {verified: true, message: 'Account successfully verified'};
+                return {message: 'Account successfully verified'};
             }
         } else {
             throw new ForbiddenException(`Sorry, we couldn't verify your email address`);
         }
     }
 
-    async forgotPassword(email: string){
+    async forgotPassword(email: string): Promise<IGenericResponse> {
         const user = await this.usersService.findOne({where: {email: email}})
         if(!user) throw new BadRequestException('User not found');
 
-        await this.createForgotPasswordToken(email);
-        await this.mailerService.sendForgotPasswordEmail(email);
+        try {
+            await this.createForgotPasswordToken(email);
+            await this.mailerService.sendForgotPasswordEmail(email);
+            return {message: 'An email has been sent to you.'}
+        } catch (err) {
+            throw new InternalServerErrorException();
+        }
     }
 
-    async changePassword(token: string, password: string){
-        if(!token) throw new BadRequestException('No token provided');
+    async changePassword(token: string, password: string): Promise<IUserResponse> {
         const forgotPasswordEntity = await this.forgotPasswordRepository.findOne({where: {token: token}});
 
         if(forgotPasswordEntity && forgotPasswordEntity.token){
@@ -142,8 +149,12 @@ export class AuthService {
         }
     }
 
-    async createForgotPasswordToken(email: string){
+    createForgotPasswordToken(email: string): void {
         const token = Math.random().toString(36).substr(2, 9);
-        await this.forgotPasswordRepository.createEntity({email: email, token: token});
+        try {
+            this.forgotPasswordRepository.createEntity({email: email, token: token});
+        } catch (e) {
+            throw new InternalServerErrorException();
+        }
     }
 }
