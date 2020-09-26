@@ -108,6 +108,13 @@ export class AuthService {
         const emailVerification = await this.emailVerificationRepository.findOne({where: {token: token}})
 
         if(emailVerification && emailVerification.token){
+            const expires = new Date(emailVerification.expiresAt).getTime();
+            const now = new Date().getTime()
+
+            if(expires < now) {
+                throw new BadRequestException('This token has expired please request a new one')
+            }
+
             const user = await this.usersService.findOne({where: {email: emailVerification.email}});
 
             if(user){
