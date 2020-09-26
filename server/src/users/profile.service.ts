@@ -14,8 +14,8 @@ export class ProfileService {
         private userService: UsersService,
     ) {}
 
-    getProfile(options: FindOneOptions): Promise<Profile> {
-        return this.profileRepository.findOne(options);
+    async getProfile(options: FindOneOptions): Promise<Profile> {
+        return await this.profileRepository.findOne(options);
     }
 
     async updateProfile(props: ProfileDto, userId): Promise<Profile> {

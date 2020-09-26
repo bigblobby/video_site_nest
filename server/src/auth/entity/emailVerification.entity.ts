@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, CreateDateColumn} from "typeorm";
 
 @Entity()
 export class EmailVerification {
@@ -10,4 +10,10 @@ export class EmailVerification {
 
     @Column()
     email: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @Column({type: "timestamp"})
+    expiresAt: Date
 }

@@ -85,7 +85,7 @@ export class AuthService {
     }
 
     signToken(user: any): ILoginRegisterResponse {
-        const payload = { email: user.email, sub: user.id, verified: user.verified };
+        const payload = { email: user.email, sub: user.id, verified: user.verified, roles: user.roles };
         return {
             user: user,
             token: this.jwtService.sign(payload),
@@ -95,11 +95,12 @@ export class AuthService {
     async createEmailToken(email: string): Promise<void>{
         const model = await this.emailVerificationRepository.findOne({where: {email: email}});
         const token = Math.random().toString(36).substr(2, 9);
+        const expiresAt = new Date().setHours((new Date()).getHours() + 2);
 
         if(model){
-            await this.emailVerificationRepository.updateEntity(model.id, {token: token})
+            await this.emailVerificationRepository.updateEntity(model.id, {token: token, expiresAt: new Date(expiresAt)})
         } else {
-            await this.emailVerificationRepository.createEntity({email: email, token: token});
+            await this.emailVerificationRepository.createEntity({email: email, token: token, expiresAt: new Date(expiresAt)});
         }
     }
 

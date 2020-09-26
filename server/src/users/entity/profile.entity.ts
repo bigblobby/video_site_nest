@@ -1,6 +1,14 @@
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    OneToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {User} from './user.entity';
-import {Expose} from "class-transformer";
+import {Exclude, Expose} from "class-transformer";
 
 const groups = {
     other: 'other',
@@ -34,6 +42,14 @@ export class Profile {
     @Expose({groups: [groups.all]})
     @Column({nullable: true})
     phone: string;
+
+    @Exclude()
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @Exclude()
+    @UpdateDateColumn()
+    updatedAt: Date;
 
     @Expose({groups: [groups.all]})
     @OneToOne(type => User, user => user.profile, {cascade: true})

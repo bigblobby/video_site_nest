@@ -16,6 +16,8 @@ import {UsersService} from "./users.service";
 import {ProfileDto} from "./dto/ProfileDto";
 import {ProfileService} from "./profile.service";
 import {Profile, ProfileSerializationGroups} from "./entity/profile.entity";
+import {RolesGuard} from "../auth/guard/roles.guard";
+import {Roles} from "../auth/decorator/roles.decorator";
 
 @Controller('profile')
 export class ProfileController {
@@ -24,7 +26,8 @@ export class ProfileController {
         private readonly profileService: ProfileService
     ) {}
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('user')
     @SerializeOptions({groups: [ProfileSerializationGroups.all]})
     @UseInterceptors(ClassSerializerInterceptor)
     @Get()

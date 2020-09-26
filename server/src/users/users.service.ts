@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {User} from './entity/user.entity';
 import {FindOneOptions} from "typeorm";
 import {UserRepository} from "./repository/user.repository";
-import {IUserResponse} from "./interfaces/user.interface";
 
 @Injectable()
 export class UsersService {
@@ -31,7 +30,8 @@ export class UsersService {
     async create(email: string, password: string): Promise<User> {
         const userEntity = await this.usersRepository.create({
             email: email,
-            password: password
+            password: password,
+            roles: ["user"],
         });
 
         await this.usersRepository.save(userEntity);
