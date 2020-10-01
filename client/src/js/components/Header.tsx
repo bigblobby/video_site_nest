@@ -21,13 +21,13 @@ class Header extends React.Component<HeaderProps, {}> {
                         <nav className="navigation">
                             <ul>
                                 <li>
-                                    <NavLink to={"/"}>Models</NavLink>
+                                    <NavLink to={"/"}>One</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink exact to={"/"}>Categories</NavLink>
+                                    <NavLink exact to={"/"}>Two</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink exact to={"/"}>Live Cams</NavLink>
+                                    <NavLink exact to={"/"}>Three</NavLink>
                                 </li>
                             </ul>
                         </nav>

@@ -4,16 +4,25 @@
     background-color: #f6f6f6;
 
     .login-container {
-        max-width: 500px;
         margin: 0 auto;
-        padding: 2rem;
-        box-shadow: 0 0 10px 1px #dedede;
-        background-color: $white;
+        max-width: 500px;
 
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: $mineshaft;
+        .login-container--body {
+            padding: 2rem;
+            background-color: $white;
+            box-shadow: 0 0 10px 1px #dedede;
+
+            h1 {
+                text-align: center;
+                margin-bottom: 2rem;
+                color: $mineshaft;
+            }
+        }
+
+        .login-container--footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
         }
     }
 }

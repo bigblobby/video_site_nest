@@ -32,3 +32,11 @@
         color: $white;
     }
 }
+
+.btn-link {
+    color: $punch;
+
+    &:hover {
+        color: $punch;
+    }
+}
