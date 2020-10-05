@@ -18,6 +18,11 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
         }
     }
 
+    handleChange = (e) => {
+        this.setState({
+            email: e.target.value
+        });
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -26,11 +31,13 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
             email: this.state.email
         }).then(result => {
             this.setState({
-                successMessage: result.message
+                successMessage: result.message,
+                errorMessages: []
             });
         }).catch(err => {
             this.setState({
-                errorMessages: err.message
+                successMessage: '',
+                errorMessages: err.message,
             })
         });
     }
@@ -48,10 +55,12 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group mb-4">
                                     <label htmlFor="email">Email address *</label>
-                                    <input className="form-control" type="email" id="email" />
+                                    <input className="form-control" type="email" id="email" onChange={this.handleChange} />
                                 </div>
 
                                 <button className="btn btn-primary w-100 justify-content-center">Request password reset</button>
+
+                                {this.state.successMessage && <p>{this.state.successMessage}</p>}
                             </form>
                         </div>
                     </div>

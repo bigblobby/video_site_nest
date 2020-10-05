@@ -127,16 +127,12 @@ export class AuthService {
     }
 
     async forgotPassword(email: string): Promise<IGenericResponse> {
-        const user = await this.usersService.findOne({where: {email: email}})
-        if(!user) throw new BadRequestException('User not found');
+        // const user = await this.usersService.findOne({where: {email: email}})
+        // if(!user) throw new BadRequestException('User not found');
 
-        try {
-            await this.createForgotPasswordToken(email);
-            await this.mailerService.sendForgotPasswordEmail(email);
-            return {message: 'An email has been sent to you.'}
-        } catch (err) {
-            throw new InternalServerErrorException();
-        }
+        await this.createForgotPasswordToken(email);
+        await this.mailerService.sendForgotPasswordEmail(email);
+        return { message: 'We have emailed you a link to reset your password.' }
     }
 
     async changePassword(token: string, password: string): Promise<IUserResponse> {
