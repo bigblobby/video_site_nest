@@ -1,6 +1,6 @@
 import axios from 'axios';
 import TokenService from "./TokenService";
-import {ILoginResponse, IRegisterResponse, IUserPostData} from "../interfaces";
+import {IForgotPasswordData, ILoginResponse, IRegisterResponse, IUserPostData} from "../interfaces";
 
 const instance = axios.create({
     baseURL: '/api'
@@ -60,6 +60,11 @@ class ApiService {
 
     loginUser(data: IUserPostData): Promise<ILoginResponse>{
         const uri = '/auth/login';
+        return this.post(uri, data);
+    }
+
+    requestPasswordReset(data: IForgotPasswordData){
+        const uri = '/auth/user/forgot-password';
         return this.post(uri, data);
     }
 

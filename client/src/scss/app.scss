@@ -48,14 +48,20 @@
 //@import "~bootstrap/scss/spinners";
 //@import "~bootstrap/scss/print";
 
+// Mixins
+@import "mixins/box-shadow";
+
 // Global
 @import "global/colors";
 @import "global/base";
+@import "global/forms";
 
 // Pages
 @import "pages/login-page";
 @import "pages/register-page";
+@import "pages/forgot-password-page";
 
 // Components
 @import "components/header";
 @import "components/button";
+@import "components/card";

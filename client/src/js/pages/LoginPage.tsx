@@ -57,7 +57,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center">
-                                <a className="btn-link" href="#"><small>Forgot your password?</small></a>
+                                <Link className="btn-link" to={"forgot-password"}><small>Forgot your password?</small></Link>
                                 <button className="btn btn-primary" type="submit">Login</button>
                             </div>
                         </form>

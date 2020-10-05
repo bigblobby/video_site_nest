@@ -12,5 +12,9 @@ export interface ILoginRegisterResponse {
     token: string;
 }
 
+export interface IForgotPasswordData {
+    email: string;
+}
+
 export interface IRegisterResponse extends ILoginRegisterResponse {}
 export interface ILoginResponse extends ILoginRegisterResponse {}

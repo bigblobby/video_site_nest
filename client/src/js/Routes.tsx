@@ -28,6 +28,7 @@ const store = createStore(
 const Homepage = React.lazy(() => import("./pages/Homepage"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const RegisterPage = React.lazy(() => import("./pages/RegisterPage"));
+const ForgotPasswordPage = React.lazy(() => import("./pages/ForgotPasswordPage"));
 const UserChannelPage = React.lazy(() => import("./pages/UserChannelPage"));
 const UserProfilePage = React.lazy(() => import("./pages/UserProfilePage"));
 const UserVerifyPage = React.lazy(() => import("./pages/UserVerifyPage"));
@@ -44,6 +45,7 @@ function Routes() {
                             <Route exact path="/" component={Homepage} />
                             <GuestRoute exact path="/login" verify component={LoginPage} />
                             <GuestRoute exact path="/register" verify component={RegisterPage} />
+                            <Route exact path="/forgot-password" component={ForgotPasswordPage} />
                             <Route exact path="/user/channel/:username" component={UserChannelPage} />
                             <PrivateRoute exact path="/user/profile" component={UserProfilePage} />
                             <Route exact path="/user/verify/:token" component={UserVerifyPage} />
