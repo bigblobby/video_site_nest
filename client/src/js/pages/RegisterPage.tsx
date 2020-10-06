@@ -38,21 +38,26 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
     render(){
         return (
             <div className="register-page">
-                <div className="register-container">
-                    <h1>Register for free</h1>
+                <div className="container max-width-500">
+                    <div className="card">
+                        <div className="card__main">
+                            <h1 className="text-center">Create an account</h1>
+                            <p className="text-center">Its free.</p>
 
-                    <form onSubmit={ this.handleSubmit }>
-                        <div className="form-group">
-                            <label htmlFor="email">Email *</label>
-                            <input className="form-control" type="email" name="email" id="email" onChange={ this.handleChange }/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password *</label>
-                            <input className="form-control" type="password" name="password" id="password" onChange={ this.handleChange }/>
-                        </div>
+                            <form onSubmit={ this.handleSubmit }>
+                                <div className="form-group">
+                                    <label htmlFor="email">Email *</label>
+                                    <input className="form-control" type="email" name="email" id="email" onChange={ this.handleChange }/>
+                                </div>
+                                <div className="form-group mb-4">
+                                    <label htmlFor="password">Password *</label>
+                                    <input className="form-control" type="password" name="password" id="password" onChange={ this.handleChange }/>
+                                </div>
 
-                        <button className="btn btn-primary w-100" type="submit">Sign up</button>
-                    </form>
+                                <button className="btn btn-primary w-100 justify-content-center" type="submit">Sign up</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

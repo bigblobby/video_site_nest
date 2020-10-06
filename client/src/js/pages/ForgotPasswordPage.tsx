@@ -45,23 +45,25 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
     render() {
         return (
             <div className="forgot-password-page">
-                <div className="container">
-                    <div className="card max-width-500">
-                        <div className="card__header">
-                            <h3 className="card__title">Forgot your password?</h3>
-                            <p>Enter the email address associated with your account and we will send you a link to reset your password.</p>
-                        </div>
-                        <div className="card__body">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="form-group mb-4">
-                                    <label htmlFor="email">Email address *</label>
-                                    <input className="form-control" type="email" id="email" onChange={this.handleChange} />
-                                </div>
+                <div className="container max-width-500">
+                    <div className="card">
+                        <div className="card__main">
+                            <div className="card__header">
+                                <h3 className="card__title">Forgot your password?</h3>
+                                <p>Enter the email address associated with your account and we will send you a link to reset your password.</p>
+                            </div>
+                            <div className="card__body">
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="form-group mb-4">
+                                        <label htmlFor="email">Email address *</label>
+                                        <input className="form-control" type="email" id="email" onChange={this.handleChange} />
+                                    </div>
 
-                                <button className="btn btn-primary w-100 justify-content-center">Request password reset</button>
+                                    <button className="btn btn-primary w-100 justify-content-center">Request password reset</button>
 
-                                {this.state.successMessage && <p>{this.state.successMessage}</p>}
-                            </form>
+                                    {this.state.successMessage && <p>{this.state.successMessage}</p>}
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

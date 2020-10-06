@@ -43,28 +43,30 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
     render(){
         return (
             <div className="login-page">
-                <div className="login-container">
-                    <div className="login-container--body">
-                        <h1>Login</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="email">Email *</label>
-                                <input className="form-control" type="email" name="email" id="email" onChange={ this.handleChange }/>
-                            </div>
-                            <div className="form-group mb-4">
-                                <label htmlFor="password">Password *</label>
-                                <input className="form-control" type="password" name="password" id="password" onChange={ this.handleChange }/>
-                            </div>
+                <div className="container max-width-500">
+                    <div className="card">
+                        <div className="card__main">
+                            <h1 className="mb-3 text-center">Log In</h1>
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="email">Email *</label>
+                                    <input className="form-control" type="email" name="email" id="email" onChange={ this.handleChange }/>
+                                </div>
+                                <div className="form-group mb-4">
+                                    <label htmlFor="password">Password *</label>
+                                    <input className="form-control" type="password" name="password" id="password" onChange={ this.handleChange }/>
+                                </div>
 
-                            <div className="d-flex justify-content-between align-items-center">
-                                <Link className="btn-link" to={"forgot-password"}><small>Forgot your password?</small></Link>
-                                <button className="btn btn-primary" type="submit">Login</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <Link className="btn-link" to={"forgot-password"}><small>Forgot your password?</small></Link>
+                                    <button className="btn btn-primary" type="submit">Login</button>
+                                </div>
+                            </form>
+                        </div>
 
-                    <div className="login-container--footer">
-                        <p>Dont have an account? <Link className="btn-link" to={"/register"}>Sign up</Link></p>
+                        <div className="card__outer-footer">
+                            <p>Dont have an account? <Link className="btn-link" to={"/register"}>Create one</Link></p>
+                        </div>
                     </div>
                 </div>
             </div>
