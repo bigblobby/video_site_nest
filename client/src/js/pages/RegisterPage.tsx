@@ -1,6 +1,7 @@
 import React from 'react';
 import { userRegister } from "../actions/userActions";
 import { connect } from "react-redux";
+import Container from "../components/common/layout/Container";
 
 type RegisterPageState = {
     email: string;
@@ -38,7 +39,7 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
     render(){
         return (
             <div className="register-page">
-                <div className="container max-width-500">
+                <Container mw={500}>
                     <div className="card">
                         <div className="card__main">
                             <h1 className="text-center">Create an account</h1>
@@ -58,11 +59,10 @@ class RegisterPage extends React.Component<RegisterPageProps, RegisterPageState>
                             </form>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
         )
     }
-
 }
 
 const mapStateToProps = ({userReducer}) => {

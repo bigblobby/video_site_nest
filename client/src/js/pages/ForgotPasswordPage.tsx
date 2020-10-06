@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiService from "../services/ApiService";
+import Container from "../components/common/layout/Container";
 
 type ForgotPasswordPageState = {
     email: string;
@@ -45,7 +46,7 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
     render() {
         return (
             <div className="forgot-password-page">
-                <div className="container max-width-500">
+                <Container mw={500}>
                     <div className="card">
                         <div className="card__main">
                             <div className="card__header">
@@ -66,7 +67,7 @@ class ForgotPasswordPage extends React.Component<{}, ForgotPasswordPageState> {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
         );
     }

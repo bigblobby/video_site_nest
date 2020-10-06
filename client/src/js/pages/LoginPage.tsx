@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { userLogin } from "../actions/userActions";
+import Container from "../components/common/layout/Container";
 
 type LoginPageState = {
     email: string;
@@ -43,7 +44,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
     render(){
         return (
             <div className="login-page">
-                <div className="container max-width-500">
+                <Container mw={500}>
                     <div className="card">
                         <div className="card__main">
                             <h1 className="mb-3 text-center">Log In</h1>
@@ -68,7 +69,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                             <p>Dont have an account? <Link className="btn-link" to={"/register"}>Create one</Link></p>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
         )
     }
