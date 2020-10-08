@@ -20,10 +20,10 @@ class Container extends React.Component<ContainerProps, ContainerState> {
     }
 
     componentDidMount() {
-        this.normaliseProps(this.props);
+        this.convertProps(this.props);
     }
 
-    normaliseProps = (props) => {
+    convertProps = (props) => {
         const classNames = composeClassNames(
             props.mw && `max-width-${props.mw}`
         );

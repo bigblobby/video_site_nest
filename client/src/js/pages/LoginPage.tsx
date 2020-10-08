@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { userLogin } from "../actions/userActions";
 import Container from "../components/common/layout/Container";
+import EmailField from "../components/form/field/EmailField";
+import PasswordField from "../components/form/field/PasswordField";
 
 type LoginPageState = {
     email: string;
@@ -35,9 +37,10 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
         }, this.props.prevUrl);
     };
 
-    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange = (value, name) => {
+        console.log(value, name);
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: value
         } as { [K in keyof LoginPageState]: LoginPageState[K] } );
     };
 
@@ -51,11 +54,11 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Email *</label>
-                                    <input className="form-control" type="email" name="email" id="email" onChange={ this.handleChange }/>
+                                    <EmailField id="email" value={this.state.email} name="email" onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group mb-4">
                                     <label htmlFor="password">Password *</label>
-                                    <input className="form-control" type="password" name="password" id="password" onChange={ this.handleChange }/>
+                                    <PasswordField id="password" value={this.state.password} name="password" onChange={this.handleChange} />
                                 </div>
 
                                 <div className="d-flex justify-content-between align-items-center">
