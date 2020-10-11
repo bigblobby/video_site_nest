@@ -1,8 +1,8 @@
-const state = {
+const initialState = {
     list: []
 };
 
-function snackbarReducer(initialState = state, action){
+function snackbarReducer(state = initialState, action){
     switch(action.type){
         case "ADD_NOTIFICATION":
             return {
