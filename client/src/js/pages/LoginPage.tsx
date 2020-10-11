@@ -5,6 +5,7 @@ import { userLogin } from "../actions/userActions";
 import Container from "../components/common/layout/Container";
 import EmailField from "../components/form/field/EmailField";
 import PasswordField from "../components/form/field/PasswordField";
+import {addNotification} from "../actions/snackbarActions";
 
 type LoginPageState = {
     email: string;
@@ -16,6 +17,7 @@ type LoginPageProps = {
     location: { state: { from } };
     userLogin: (user, url) => {};
     prevUrl: string;
+    addNotification: (data, duration?) => void
 }
 
 class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
@@ -43,6 +45,13 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
         } as { [K in keyof LoginPageState]: LoginPageState[K] } );
     };
 
+    add = () => {
+        this.props.addNotification({
+            type: 'success',
+            message: 'This is a message'
+        }, 5000)
+    }
+
     render(){
         return (
             <div className="login-page">
@@ -50,6 +59,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                     <div className="card">
                         <div className="card__main">
                             <h1 className="mb-3 text-center">Log In</h1>
+                            <button onClick={this.add}>add</button>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Email *</label>
@@ -87,6 +97,6 @@ const mapStateToProps = ({userReducer, appReducer}) => {
     }
 };
 
-const mapDispatchToProps = { userLogin };
+const mapDispatchToProps = { userLogin, addNotification };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
