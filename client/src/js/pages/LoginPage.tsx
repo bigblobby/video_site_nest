@@ -24,7 +24,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
         }
     }
 
@@ -38,7 +38,6 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
     };
 
     handleChange = (value, name) => {
-        console.log(value, name);
         this.setState({
             [name]: value
         } as { [K in keyof LoginPageState]: LoginPageState[K] } );

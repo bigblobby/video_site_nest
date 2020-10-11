@@ -29,3 +29,12 @@
         margin: 1rem 0;
     }
 }
+
+// Card modifiers
+.card {
+    &--no-shadow {
+        .card__main {
+            box-shadow: none;
+        }
+    }
+}
