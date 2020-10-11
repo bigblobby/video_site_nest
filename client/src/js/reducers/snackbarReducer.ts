@@ -3,7 +3,6 @@ const state = {
 };
 
 function snackbarReducer(initialState = state, action){
-    console.log(action);
     switch(action.type){
         case "ADD_NOTIFICATION":
             return {

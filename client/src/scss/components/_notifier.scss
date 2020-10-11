@@ -1,0 +1,26 @@
+.notifier {
+    position: fixed;
+    z-index: 1000000;
+    left: 16px;
+    bottom: 16px;
+}
+
+.notification {
+    position: relative;
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    margin-top: 1rem;
+
+    &.success {
+        background-color: #43a047;
+        color: $white;
+        border-radius: 4px;
+    }
+
+    &__close {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+}

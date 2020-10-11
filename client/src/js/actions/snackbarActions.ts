@@ -10,20 +10,17 @@ const removeNotificationAction = (data) => ({
 });
 
 // Action creators
-export function addNotification(data, duration = 3000){
+export function addNotification(data){
     return (dispatch, getState) => {
         const list = [...getState().snackbarReducer.list];
-        const key = Math.random().toString(36).substr(2, 9);
-        const newData = {...data, key: key};
-
-        list.push(newData);
+        list.unshift(data);
         dispatch(addNotificationAction(list));
 
         setTimeout(() => {
             let nextList = getState().snackbarReducer.list;
-            nextList = nextList.filter(item => item.key !== key);
+            nextList = nextList.filter(item => item.key !== data.key);
             dispatch(removeNotificationAction(nextList));
-        }, duration);
+        }, data.duration);
     }
 }
 

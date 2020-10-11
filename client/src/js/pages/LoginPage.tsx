@@ -6,6 +6,7 @@ import Container from "../components/common/layout/Container";
 import EmailField from "../components/form/field/EmailField";
 import PasswordField from "../components/form/field/PasswordField";
 import {addNotification} from "../actions/snackbarActions";
+import {INotification} from "../interfaces/notification";
 
 type LoginPageState = {
     email: string;
@@ -17,7 +18,7 @@ type LoginPageProps = {
     location: { state: { from } };
     userLogin: (user, url) => {};
     prevUrl: string;
-    addNotification: (data, duration?) => void
+    addNotification: (data: INotification) => void
 }
 
 class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
@@ -46,10 +47,13 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
     };
 
     add = () => {
+        let key = Math.random().toString(36).substr(2, 9);
         this.props.addNotification({
+            key: key,
             type: 'success',
-            message: 'This is a message'
-        }, 5000)
+            message: `This is a message ${key}`,
+            duration: 5000
+        });
     }
 
     render(){

@@ -10,6 +10,7 @@ import history from "./history";
 import Header from "./components/Header";
 import PrivateRoute from "./routes/PrivateRoute";
 import GuestRoute from "./routes/GuestRoute";
+import Notifier from "./components/Notifier";
 
 const middleware = [
     thunk,
@@ -39,6 +40,7 @@ function Routes() {
             <ConnectedRouter history={history}>
                 <div className="site-content">
                     <Header />
+                    <Notifier />
 
                     <Suspense fallback={'Loading'}>
                         <Switch>
