@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {INotification} from "../interfaces/notification";
-import {removeNotification} from "../actions/snackbarActions";
+import Notification from "./Notification";
 
 type NotifierProps = {
-    list: INotification[],
-    removeNotification: (key) => void;
+    list: INotification[];
 }
 
 class Notifier extends React.Component<NotifierProps> {
@@ -14,12 +13,7 @@ class Notifier extends React.Component<NotifierProps> {
             <div className="notifier">
                 {
                     this.props.list.map(item => {
-                        return (
-                            <div className={"notification " + (item.type)}>
-                                {item.message}
-                                <span className="notification__close" onClick={() => this.props.removeNotification(item.key)}>&#10005;</span>
-                            </div>
-                        )
+                        return <Notification key={item.key} item={item} />
                     })
                 }
             </div>
@@ -34,6 +28,4 @@ const mapStateToProps = ({snackbarReducer}) => {
     }
 }
 
-const mapDispatchToProps = {removeNotification};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notifier);
+export default connect(mapStateToProps, null)(Notifier);

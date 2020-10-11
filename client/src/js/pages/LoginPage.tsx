@@ -46,13 +46,13 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
         } as { [K in keyof LoginPageState]: LoginPageState[K] } );
     };
 
-    add = () => {
+    add = (type) => {
         let key = Math.random().toString(36).substr(2, 9);
         this.props.addNotification({
             key: key,
-            type: 'success',
+            type: type,
             message: `This is a message ${key}`,
-            duration: 5000
+            duration: 300000
         });
     }
 
@@ -63,7 +63,10 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                     <div className="card">
                         <div className="card__main">
                             <h1 className="mb-3 text-center">Log In</h1>
-                            <button onClick={this.add}>add</button>
+                            <button onClick={() => this.add('success')}>add</button>
+                            <button onClick={() => this.add('info')}>add</button>
+                            <button onClick={() => this.add('warning')}>add</button>
+                            <button onClick={() => this.add('error')}>add</button>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Email *</label>
