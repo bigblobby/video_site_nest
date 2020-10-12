@@ -5,7 +5,7 @@ import {userLogout} from "../actions/userActions";
 
 type HeaderProps = {
     authenticated: boolean;
-    userLogout: () => {};
+    userLogout: () => void;
 }
 
 class Header extends React.Component<HeaderProps, {}> {
@@ -37,7 +37,7 @@ class Header extends React.Component<HeaderProps, {}> {
                                 this.props.authenticated ? (
                                     <>
                                         <div>
-                                            <Link className="btn" to={"/profile"}>Account</Link>
+                                            <Link className="btn" to={"/user/profile"}>Account</Link>
                                         </div>
                                         <div>
                                             <button className="btn" onClick={this.props.userLogout}>Logout</button>

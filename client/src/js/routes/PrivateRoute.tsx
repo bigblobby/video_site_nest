@@ -14,7 +14,6 @@ type PrivateRouteProps = {
 }
 
 class PrivateRoute extends React.Component<PrivateRouteProps, {}> {
-
     componentDidMount() {
         this.props.verifyToken();
         this.props.setPrevUrl(this.props.location.pathname);

@@ -1,6 +1,7 @@
 import ApiService from "../services/ApiService";
 import TokenService from "../services/TokenService";
 import {push} from 'connected-react-router';
+import {addNotification} from "./snackbarActions";
 
 // Action types
 const authSuccessAction =  (user) => ({
@@ -38,6 +39,13 @@ export function userLogin(data, previousUrl = '/'){
                 dispatch(authSuccessAction(result.user));
                 TokenService.setToken(result.token);
                 dispatch(push(previousUrl));
+
+                dispatch(addNotification({
+                    key: 'login',
+                    type: 'success',
+                    message: `Welcome back!`,
+                    duration: 3000
+                }));
             }).catch(err => {
                 dispatch(authFailureAction(err.message));
             });
@@ -49,6 +57,13 @@ export function userLogout(){
         TokenService.removeToken();
         dispatch(userLogoutAction())
         dispatch(push('/'))
+
+        dispatch(addNotification({
+            key: 'logout',
+            type: 'success',
+            message: `Successfully logged out`,
+            duration: 3000
+        }));
     }
 }
 

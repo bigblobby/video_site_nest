@@ -52,7 +52,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
             key: key,
             type: type,
             message: `This is a message ${key}`,
-            duration: 300000
+            duration: 3000
         });
     }
 
