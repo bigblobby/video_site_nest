@@ -1,0 +1,9 @@
+.user-actions {
+    display: flex;
+    align-items: center;
+
+    &__link-login {
+        color: $punch;
+        margin-right: 1rem;
+    }
+}

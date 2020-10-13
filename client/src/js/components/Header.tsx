@@ -11,23 +11,23 @@ type HeaderProps = {
 class Header extends React.Component<HeaderProps, {}> {
     render() {
         return (
-            <div className="main-header">
-                <div className="container container-fluid max-width">
-                    <div className="main-header--inner">
-                        <div className="logo">
-                            <Link to={"/"}>LOGO</Link>
+            <div className="container container-fluid max-width">
+                <div className="header">
+                    <div className="header__inner">
+                        <div className="header__logo">
+                            <Link class="header__logo-link" to={"/"}>LOGO</Link>
                         </div>
 
                         <nav className="navigation">
-                            <ul>
-                                <li>
-                                    <NavLink to={"/"}>One</NavLink>
+                            <ul className="navigation__list">
+                                <li className="navigation__item">
+                                    <NavLink className="navigation__link" to={"/"}>One</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink exact to={"/"}>Two</NavLink>
+                                <li className="navigation__item">
+                                    <NavLink className="navigation__link" to={"/"}>Two</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink exact to={"/"}>Three</NavLink>
+                                <li className="navigation__item">
+                                    <NavLink className="navigation__link" to={"/"}>Three</NavLink>
                                 </li>
                             </ul>
                         </nav>
@@ -36,19 +36,19 @@ class Header extends React.Component<HeaderProps, {}> {
                             {
                                 this.props.authenticated ? (
                                     <>
-                                        <div>
+                                        <div className="user-actions__link-container">
                                             <Link className="btn" to={"/user/profile"}>Account</Link>
                                         </div>
-                                        <div>
+                                        <div className="user-actions__link-container">
                                             <button className="btn" onClick={this.props.userLogout}>Logout</button>
                                         </div>
                                     </>
                                 ) : (
                                     <>
-                                        <div>
-                                            <Link className="login" to={"/login"}>Login</Link>
+                                        <div className="user-actions__link-container">
+                                            <Link className="user-actions__link-login" to={"/login"}>Login</Link>
                                         </div>
-                                        <div>
+                                        <div className="user-actions__link-container">
                                             <Link className="btn btn-primary sign-up" to={"/register"}>Sign Up</Link>
                                         </div>
                                     </>

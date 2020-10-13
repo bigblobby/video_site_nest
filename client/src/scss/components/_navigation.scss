@@ -1,0 +1,28 @@
+.navigation {
+    display: flex;
+    align-items: center;
+
+    &__list {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        list-style: none;
+        height: 100%;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        padding: 1.25rem 2rem;
+        height: 100%;
+        color: $mineshaft;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.active {
+            border-bottom: 2px solid $punch;
+        }
+    }
+}
