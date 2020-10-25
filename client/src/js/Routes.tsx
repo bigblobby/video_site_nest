@@ -47,7 +47,7 @@ function Routes() {
                             <Route exact path="/" component={Homepage} />
                             <GuestRoute exact path="/login" verify component={LoginPage} />
                             <GuestRoute exact path="/register" component={RegisterPage} />
-                            <Route exact path="/forgot-password" component={ForgotPasswordPage} />
+                            <Route exact path="/user/forgot-password/:token" component={ForgotPasswordPage} />
                             <Route exact path="/user/channel/:username" component={UserChannelPage} />
                             <PrivateRoute exact path="/user/profile" component={UserProfilePage} />
                             <Route exact path="/user/verify/:token" component={UserVerifyPage} />

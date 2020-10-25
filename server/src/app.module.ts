@@ -9,11 +9,17 @@ import {ValidationPipe} from "./common/pipes/validation.pipe";
 import {Connection} from "typeorm";
 import { AuthModule } from './auth/auth.module';
 import * as path from "path";
-import {ConfigModule} from "nestjs-config";
+import { ConfigModule } from "nestjs-config";
+// import { ConfigModule as ConfigModuleCore } from "@nestjs/config";
 import { MailerModule } from './mailer/mailer.module';
+import { MediaModule } from './media/media.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
     imports: [
+        // ConfigModuleCore.forRoot({
+        //     isGlobal: true
+        // }),
         ConfigModule.load(path.resolve(__dirname, 'config/database.js')),
         TypeOrmModule.forRootAsync({
             useFactory: async (config: ConfigService) => config.get('database'),
@@ -22,6 +28,8 @@ import { MailerModule } from './mailer/mailer.module';
         UsersModule,
         AuthModule,
         MailerModule,
+        MediaModule,
+        CloudinaryModule,
     ],
     controllers: [AppController],
     providers: [

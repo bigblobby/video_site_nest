@@ -14,15 +14,28 @@ export class ProfileService {
         private userService: UsersService,
     ) {}
 
+    findOne(options: FindOneOptions): Promise<Profile | undefined> {
+        return this.profileRepository.findOne(options);
+    }
+
     async getProfile(options: FindOneOptions): Promise<Profile> {
         return await this.profileRepository.findOne(options);
     }
 
-    async updateProfile(props: ProfileDto, userId): Promise<Profile> {
+    async update(props, userId){
         const user = await this.userService.findOne({where: {id: userId}})
         const data = {...props, user: user}
 
         await this.profileRepository.updateProfile(data);
+
         return this.getProfile({where: {user: userId}});
+    }
+
+    async updateProfile(props: ProfileDto, userId): Promise<Profile> {
+        return this.update(props, userId);
+    }
+
+    async updateProfileAvatar(props, userId): Promise<Profile>{
+        return this.update(props, userId);
     }
 }

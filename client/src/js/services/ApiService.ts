@@ -72,6 +72,16 @@ class ApiService {
         const uri = '/user/channel';
         return this.post(uri, params);
     }
+
+    uploadAvatar(params){
+        const token = TokenService.getToken();
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        }
+
+        const uri = '/profile/avatar';
+        return this.post(uri, params, config);
+    }
 }
 
 export default new ApiService();

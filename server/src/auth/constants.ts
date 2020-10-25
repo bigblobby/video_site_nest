@@ -1,6 +1,6 @@
 export const jwtConstants = {
     secret: 'secretKey',
-    signOptions: { expiresIn: '60000s' }
+    signOptions: { expiresIn: '24h' }
 };
 
 export const SALT = 10;

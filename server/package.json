@@ -25,6 +25,7 @@
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
+    "cloudinary": "^1.23.0",
     "mysql": "^2.18.1",
     "nestjs-config": "^1.4.7",
     "nodemailer": "^6.4.11",

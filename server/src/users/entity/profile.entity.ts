@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import {User} from './user.entity';
 import {Exclude, Expose} from "class-transformer";
+import {Media} from "../../media/entity/media.entity";
 
 const groups = {
     other: 'other',
@@ -55,4 +56,9 @@ export class Profile {
     @OneToOne(type => User, user => user.profile, {cascade: true})
     @JoinColumn()
     user: User
+
+    @Expose({groups: [groups.all]})
+    @OneToOne(type => Media, {cascade: true})
+    @JoinColumn()
+    avatar: Media
 }

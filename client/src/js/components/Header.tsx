@@ -15,7 +15,7 @@ class Header extends React.Component<HeaderProps, {}> {
                 <div className="header">
                     <div className="header__inner">
                         <div className="header__logo">
-                            <Link class="header__logo-link" to={"/"}>LOGO</Link>
+                            <Link className="header__logo-link" to={"/"}>LOGO</Link>
                         </div>
 
                         <nav className="navigation">
