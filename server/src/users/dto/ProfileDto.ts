@@ -1,4 +1,4 @@
-import {IsPhoneNumber, IsDate, MinLength, IsOptional} from "class-validator";
+import {IsDate, MinLength, IsOptional, IsMobilePhone} from "class-validator";
 import {Media} from "../../media/entity/media.entity";
 
 export class ProfileDto {
@@ -20,7 +20,7 @@ export class ProfileDto {
     birthday: Date;
 
     @IsOptional()
-    @IsPhoneNumber('GB')
+    @IsMobilePhone('en-GB')
     phone: string;
 
     @IsOptional()

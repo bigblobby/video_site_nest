@@ -24,7 +24,8 @@ export class ProfileService {
 
     async update(props, userId){
         const user = await this.userService.findOne({where: {id: userId}})
-        const data = {...props, user: user}
+        const profile = await this.getProfile({ where: { user: userId }, relations: ['avatar'] });
+        const data = {...profile, ...props, user: userId};
 
         await this.profileRepository.updateProfile(data);
 

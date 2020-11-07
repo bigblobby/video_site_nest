@@ -45,8 +45,8 @@ function Routes() {
                     <Suspense fallback={'Loading'}>
                         <Switch>
                             <Route exact path="/" component={Homepage} />
-                            <GuestRoute exact path="/login" verify component={LoginPage} />
-                            <GuestRoute exact path="/register" component={RegisterPage} />
+                            <GuestRoute exact path="/login" verify redirect component={LoginPage} />
+                            <GuestRoute exact path="/register" verify component={RegisterPage} />
                             <Route exact path="/user/forgot-password/:token" component={ForgotPasswordPage} />
                             <Route exact path="/user/channel/:username" component={UserChannelPage} />
                             <PrivateRoute exact path="/user/profile" component={UserProfilePage} />

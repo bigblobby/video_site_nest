@@ -11,7 +11,7 @@ export class ProfileRepository extends Repository<Profile> {
             .insert()
             .into(Profile)
             .values(data)
-            .orUpdate({ conflict_target: ['userId', 'avatarId'], overwrite: ['username', 'firstName', 'lastName', 'birthday', 'phone', 'userId', 'avatarId'] })
+            .orUpdate({ conflict_target: ['userId'], overwrite: ['username', 'firstName', 'lastName', 'birthday', 'phone', 'userId', 'avatarId'] })
             .execute();
     }
 }

@@ -5,17 +5,22 @@ import { Redirect } from 'react-router-dom';
 import { verifyToken } from "../actions/userActions";
 
 type GuestRouteProps = {
-    verifyToken: () => {},
+    verifyToken: (shouldRedirect) => {},
     location: {},
     user: {},
     component: Element
-    verify: boolean
+    verify: boolean,
+    redirect: boolean,
 }
 
 class GuestRoute extends React.Component<GuestRouteProps, {}> {
+    static defaultProps = {
+        redirect: false
+    }
+
     componentDidMount() {
         if(this.props.verify){
-            this.props.verifyToken();
+            this.props.verifyToken(this.props.redirect);
         }
     }
 

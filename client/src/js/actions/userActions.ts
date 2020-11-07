@@ -67,7 +67,7 @@ export function userLogout(){
     }
 }
 
-export function verifyToken(){
+export function verifyToken(shouldRedirect){
     return async (dispatch) => {
         // if(!TokenService.getToken()){
         //     dispatch(userLoginFailureAction('Token not valid'));
@@ -79,7 +79,9 @@ export function verifyToken(){
         } catch(e) {
             dispatch(authFailureAction('Could not verify token'));
             TokenService.removeToken();
-            dispatch(push('/login'));
+            if(shouldRedirect){
+                dispatch(push('/login'));
+            }
         }
     }
 }
